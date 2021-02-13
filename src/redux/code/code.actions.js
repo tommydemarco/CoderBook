@@ -1,9 +1,9 @@
-import { UserActionTypes } from "./user.types";
+import { UserActionTypes } from "./code.types";
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = (code) => {
   return {
-    type: UserActionTypes.SET_CURRENT_USER,
-    payload: user,
+    type: UserActionTypes.SET_CURRENT_CODE,
+    payload: code,
   };
 };
 
@@ -11,8 +11,8 @@ export const googleSignInStart = () => {
   return { type: UserActionTypes.GOOGLE_SIGN_IN_START };
 };
 
-export const googleSignInSuccess = (user) => {
-  return { type: UserActionTypes.GOOGLE_SIGN_IN_SUCCESS, payload: user };
+export const googleSignInSuccess = (code) => {
+  return { type: UserActionTypes.GOOGLE_SIGN_IN_SUCCESS, payload: code };
 };
 
 export const googleSignInFailure = (error) => {
@@ -26,10 +26,10 @@ export const emailSignInStart = (emailAndPassword) => {
   };
 };
 
-export const emailSignInSuccess = (user) => {
+export const emailSignInSuccess = (code) => {
   return {
     type: UserActionTypes.EMAIL_SIGN_IN_SUCCESS,
-    payload: user,
+    payload: code,
   };
 };
 
@@ -42,7 +42,7 @@ export const emailSignInFailure = (error) => {
 
 export const isUserSignedIn = () => {
   return {
-    type: UserActionTypes.IS_USER_SIGNED_IN,
+    type: UserActionTypes.IS_CODE_SIGNED_IN,
   };
 };
 

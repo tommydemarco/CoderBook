@@ -1,5 +1,5 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
-import { UserActionTypes } from "./user.types";
+import { UserActionTypes } from "./code.types";
 
 import {
   googleSignInFailure,
@@ -8,7 +8,7 @@ import {
   emailSignInSuccess,
   signOutFailure,
   signOutSuccess,
-} from "./user.actions";
+} from "./code.actions";
 import {
   auth,
   googleProvider,
@@ -21,13 +21,13 @@ export function* onGoogleSignInStart() {
 
 function* googleSignInAsync() {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapshot = yield userRef.get();
+    const { code } = yield auth.signInWithPopup(googleProvider);
+    const codeRef = yield call(createUserProfileDocument, code);
+    const codeSnapshot = yield codeRef.get();
     yield put(
       googleSignInSuccess({
-        currentUser: userSnapshot.id,
-        // ...userSnapshot.data,
+        currentUser: codeSnapshot.id,
+        // ...codeSnapshot.data,
       })
     );
   } catch (error) {
@@ -41,12 +41,12 @@ export function* onEmailSignInStart() {
 
 function* emailSignInAsync({ payload: { email, password } }) {
   try {
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapshot = yield userRef.get();
+    const { code } = yield auth.signInWithEmailAndPassword(email, password);
+    const codeRef = yield call(createUserProfileDocument, code);
+    const codeSnapshot = yield codeRef.get();
     yield put(
       emailSignInSuccess({
-        currentUser: userSnapshot.id,
+        currentUser: codeSnapshot.id,
       })
     );
   } catch (error) {
@@ -60,11 +60,11 @@ function* emailSignInAsync({ payload: { email, password } }) {
 }
 
 export function* isUserSignedIn() {
-  yield takeLatest(UserActionTypes.IS_USER_SIGNED_IN, checkUserSignedIn);
+  yield takeLatest(UserActionTypes.IS_CODE_SIGNED_IN, checkUserSignedIn);
 }
 
 export function* checkUserSignedIn() {
-  yield console.log("The check user sign in generator was called successfully");
+  yield console.log("The check code sign in generator was called successfully");
 }
 
 export function* onSignOut() {
@@ -80,7 +80,7 @@ export function* onSignOutAsync() {
   }
 }
 
-export default function* userSaga() {
+export default function* codeSaga() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),

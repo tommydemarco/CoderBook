@@ -2,7 +2,7 @@
 //          takes an array of sagas (preferably called with the call function)
 import { all, call } from "./code/node_modules/redux-saga/effects";
 
-import codeSaga from "./code/user.sagas";
+import codeSaga from "./code/code.sagas";
 
 export default function* rootSaga() {
   yield all([call(codeSaga)]);
