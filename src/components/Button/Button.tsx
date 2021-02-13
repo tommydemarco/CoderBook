@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 
 const ButtonExampleButton: React.FC<ButtonProps> = ({ text }) => (
-  <Button>Enter</Button>
+  <Button>{text}</Button>
 );
 
 export default ButtonExampleButton;

@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <div>
       <TextArea />
-      <Button text={"Click to compile"} />
+      <Button text="Click to compile" />
       <CodeOutput code={"Some code here"} />
     </div>
   );
